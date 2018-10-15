@@ -1,15 +1,12 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
+var axios = require("axios");
 var db = require("./models");
 
 var PORT = 3000;
@@ -21,68 +18,90 @@ var app = express();
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // Use express.static to serve the public folder as a static directory
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rigScraper";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// Routes
+mongoose.connect("mongodb://localhost/week18Populater", { useNewUrlParser: true });
 
+
+// Routes
+//load in all scraped articles
+app.get("/", function (req, res) {
+  db.Article.find({"saved": false}, function (err, data) {
+      res.render("home", { articles: data });
+  });
+});
+
+//load in all saved articles
+app.get("/saved", function (req, res) {
+  db.Article.find({"saved": true}, function (err, data) {
+      res.render("saved", { savedArticles: data });
+  });
+});
 // A GET route for scraping the  website
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
-    axios.get("http://rigdata.com/rigdata-insights").then(function(response) {
+    axios.get("http://rigdata.com/rigdata-insights").then(function (response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
 
-        
-    $("div.blogList_right_section").each(function(i, element) {
+        $("div.blogList_right_section").each(function(i, element) {
         // Save an empty result object
         var result = {};
-        
-        // Add the text and href of every link, and save them as properties of the result object
+         // Add the text and href of every link, and save them as properties of the result object
             
         result.title = $(this).children("a").text();
         result.link = $(this).children("a").attr("href");
         result.summary = $(this).children("div.entry-summary").text();
         result.author = $(this).siblings("blogList_author_date").children("span").text();
         result.date = $(this).siblings("blogList_author_date").children("li").text();
-        
-
-        // Create a new Article using the `result` object built from scraping
+        result.saved= false;
+    // Create a new Article using the `result` object built from scraping
     db.Article.create(result)
-      .then(function(dbArticle) {
-        // View the added result in the console
-        console.log(dbArticle);
-      })
-      .catch(function(err) {
-        // If an error occurred, send it to the client
-        return res.json(err);
-      });
-  });
-
-  // If we were able to successfully scrape and save an Article, send a message to the client
-  res.send("Scrape Complete");
+    .then(function(dbArticle) {
+      // View the added result in the console
+      console.log(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      return res.json(err);
     });
 });
 
+// If we were able to successfully scrape and save an Article, send a message to the client
+res.send("Scrape Complete");
+});
+});
+
+  //clear all articles from the db
+app.get("/clearall", function (req, res){
+  db.Article.remove({})
+  .then(function (data){
+      res.json({message:"All Articles Cleared"});
+  })
+  .catch(function (err){
+      console.log(err);
+  });
+});
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
-    // Grab every document in the Articles collection
     db.Article.find({})
       .then(function(dbArticle) {
-        // If we were able to successfully find Articles, send them back to the client
         res.json(dbArticle);
       })
       .catch(function(err) {
-        // If an error occurred, send it to the client
         res.json(err);
       });
   });
@@ -127,4 +146,4 @@ app.get("/articles", function(req, res) {
   app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
-  
+
