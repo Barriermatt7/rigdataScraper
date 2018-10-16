@@ -1,170 +1,153 @@
-html {
-    position: relative;
-    min-height: 100%;
-  }
-  
-  body {
-    margin-bottom: 80px;
-    background-image: url("../images/paper.png");
-  }
-  
-  .card a:not([href]):not([tabindex]).scrape-new {
-    color: #2196F3;
-  }
-  
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-    color: white;
-    background-color: #2196f3;
-  }
-  
-  .navbar {
-    margin-bottom: 0;
-  }
-  
-  .jumbotron {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    padding: 0;
-    font-family: "Cormorant SC";
-    box-shadow: 10px 5px 20px 2px lightslategrey;
-  }
-  
-  .jumbotron .overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: auto;
-    background: linear-gradient(#333, black);
-    opacity: 0.7;
-  }
-  
-  .jumbotron .background-image {
-    height: 100%;
-    background-image: url("../images/newspaper.jpg");
-    background-size: cover;
-  }
-  
-  .jumbotron .caption {
-    position: absolute;
-    top: 30%;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .jumbotron .caption h1,
-  .jumbotron .caption p {
-    color: white;
-  }
-  
-  .jumbotron h1 {
-    font-size: 80px;
-    font-weight: 800;
-  }
-  
-  .jumbotron p {
-    font-size: 30px;
-  }
-  
-  .article-container {
-    padding-bottom: 25px;
-  }
-  
-  .card {
-    border-radius: 0;
-    box-shadow: 3px 3px 20px lightslategrey;
-    margin: 20px 0;
-  }
-  
-  .card .card-header {
-    background-color: #2196f3;
-    position: relative;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-  
-  .card .card-header h3 {
-    color: white;
-  }
-  
-  .card .card-header .btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .card .card-header .btn.delete {
-    right: 160px;
-  }
-  
-  .card .card-body {
-    font-size: 16px;
-  }
-  
-  .card .card-header .article-link {
-    color: white;
-    display: inline-block;
-    width: 80%;
-  }
-  
-  .footer > .container > p {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    margin: 0;
-    font-weight: 800;
-    background: #0c7cd5;
-  }
-  
-  .navbar-nav > li > a.scrape-new,
-  .navbar-nav > li > a.clear {
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
-    font-weight: 800;
-    color: white;
-  }
-  
-  .navbar-nav > li > a.scrape-new:hover,
-  .navbar-nav > li > a.clear:hover {
-    background: #4caf50;
-  }
-  
-  .navbar-nav > li > a.scrape-new:active {
-    background: #e51c23;
-  }
-  
-  .scrape-new {
-    cursor: pointer;
-  }
-  
-  .m-top-80 {
-    margin-top: 80px;
-  }
-  
-  textarea {
-    padding: 10px;
-    resize: none;
-    width: 100%;
-  }
-  
-  .bootbox-body .btn {
-    float: right;
-    margin: 5px;
-  }
-  
-  .note.list-group-item .btn {
-    position: relative;
-    bottom: 10px;
-  }
-  
+.navbar {
+  background-color: rgb(40, 61, 54);
+  color: #f0efd1;
+}
+
+.nav-item {
+  margin-left: 1rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px rgb(40, 61, 54);
+}
+
+h1, h3 {
+  color: #f0efd1;
+  font-family: 'Rock Salt', cursive;
+}
+
+h4>a {
+  color: #8f7f2f
+}
+
+h4>a:hover {
+  color: #f0efd1;
+  text-decoration: none;
+}
+.darker{
+  color: rgb(40, 61, 54);
+  text-align: left;
+}
+h4, p, .btn {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#padder {
+  background-color: rgb(162, 173, 160);
+  color: #f0efd1;
+}
+
+#hero {
+  padding-top: 20rem;
+  padding-bottom: 10rem;
+  text-align: center;
+  background-image: url(https://picsum.photos/4000/2667?image=885);
+  min-height: 40rem;
+  max-height: 45rem;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.article-row {
+  padding: 2rem;
+}
+.note-header{
+  margin-bottom: 2rem;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(189, 189, 189, 0.5);
+  margin-top: 5rem;
+}
+
+.modal-content {
+  background-color: #f0efd1;
+  border: 2px solid rgb(94, 119, 111);
+  margin: 25% auto;
+  margin-top: 70px;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.modaltext {
+  font-family: 'Quicksand', sans-serif;
+  color: rgb(40, 61, 54);
+  text-shadow: none;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.close {
+  text-align: right;
+  color: rgb(40, 61, 54);
+  opacity: 1;
+  text-shadow: none;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: -15px;
+  margin-right: -10px;
+}
+
+.close:hover, .close:focus {
+  color: rgb(40, 61, 54);
+  opacity: 0.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.note-header, label {
+  color: rgb(40, 61, 54);
+}
+
+.btn-yellow {
+  color: #283d36;
+  border: none;
+  background-image: -webkit-linear-gradient(top, #f0efd1, #c4b97f);
+  background-image: -moz-linear-gradient(top, #f0efd1, #c4b97f);
+  background-image: -ms-linear-gradient(top, #f0efd1, #c4b97f);
+  background-image: -o-linear-gradient(top, #f0efd1, #c4b97f);
+  background-image: linear-gradient(top, #f0efd1, #c4b97f);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 2px 0 #8f7f2f, 0 4px 2px rgba(0, 0, 0, .5);
+}
+
+.btn-green {
+  margin-bottom: 1rem;
+  color: #f0efd1;
+  border: none;
+  background-image: -webkit-linear-gradient(top, #799188, #466359);
+  background-image: -moz-linear-gradient(top, #799188, #466359);
+  background-image: -ms-linear-gradient(top, #799188, #466359);
+  background-image: -o-linear-gradient(top, #799188, #466359);
+  background-image: linear-gradient(top, #799188, #466359);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 2px 0 #283d36, 0 4px 2px rgba(0, 0, 0, .5);
+}
+
+.btn-gold{
+  color: #283d36;
+  border: none;
+  background-image: -webkit-linear-gradient(top, #e7de97, #a39445);
+  background-image: -moz-linear-gradient(top, #799188, #466359);
+  background-image: -ms-linear-gradient(top, #799188, #466359);
+  background-image: -o-linear-gradient(top, #799188, #466359);
+  background-image: linear-gradient(top, #799188, #466359);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 2px 0 #685e2d, 0 4px 2px rgba(0, 0, 0, .2);
+}
+.nothing-message{
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}

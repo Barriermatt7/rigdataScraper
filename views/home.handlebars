@@ -1,0 +1,39 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">
+        <h3>Rig Data Scraper</h3>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <button class="btn btn-yellow" id="clear-btn">clear database</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-yellow" id="scrape-btn">scrape</button>
+            </li>
+            <li class="nav-item">
+                <a href="/"><button class="btn btn-yellow" id="saved-btn">saved</button></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+        {{#if articles}}
+        {{#each articles}}
+        {{> articles/article-block}}
+        {{/each}}
+        {{else}}
+        <div class="row">
+            <div class="col-12 justify-content-center">
+                <h4 class="nothing-message">Scrape for new Rig Data Articles</h4>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+<script src="/public/rigScraper.js"></script>

@@ -1,0 +1,69 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">
+            <h3>Rig Data Scraper</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="btn btn-yellow" id="clear-btn">clear database</button>
+                </li>
+                <li class="nav-item">
+                    <a href="/saved"><button class="btn btn-yellow">home</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="row">
+    <div class="col-12">
+        {{#if savedArticles}}
+        {{#each savedArticles}}
+        {{> articles/saved-block}}
+        {{/each}}
+        {{else}}
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <h4 class="nothing-message">Scrape for New Rig Data Articles</h4>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+<div id="notemodal" class="modal">
+    <div class="row justify-content-center">
+        <div class="modal-content search-modal-content col-11 col-sm-11 col-md-9 col-lg-6 col-xl-5">
+            <span class="close">&times;</span>
+            <h3 class="note-header">New Note</h3>
+            <form id="noteform">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="note-title">Title</label>
+                        <input type="text" class="form-control" id="title-input" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="body-input">Body</label>
+                        <textarea class="form-control" id="body-input"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="add-note-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="view-notes-modal" class="modal">
+    <div class="row justify-content-center">
+        <div class="modal-content search-modal-content col-11 col-sm-11 col-md-9 col-lg-6 col-xl-5">
+            <span class="close">&times;</span>
+            <h4 class="note-header">All Notes for "<span id="article-name"></span>"</h4>
+            <div class ="row" id="notes-holder">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/public/saved.js"></script>
